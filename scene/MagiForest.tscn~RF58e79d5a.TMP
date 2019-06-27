@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://asset/magi/magi0.png" type="Texture" id=1]
+[ext_resource path="res://asset/magi/magi1.png" type="Texture" id=2]
+[ext_resource path="res://asset/magi/magi2.png" type="Texture" id=3]
+[ext_resource path="res://asset/magi/magi3.png" type="Texture" id=4]
+[ext_resource path="res://scene/Magi.gd" type="Script" id=5]
+[ext_resource path="res://asset/forest/ground0.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "magi",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "sleep"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="MagiForest" type="Node2D"]
+
+[node name="Magi" type="AnimatedSprite" parent="."]
+position = Vector2( 227.05, 59.8499 )
+frames = SubResource( 1 )
+animation = "magi"
+script = ExtResource( 5 )
+
+[node name="MagiAnime" type="AnimationPlayer" parent="Magi"]
+autoplay = "idle"
+anims/idle = SubResource( 2 )
+anims/sleep = SubResource( 3 )
+
+[node name="Ground" type="AnimatedSprite" parent="."]
+position = Vector2( 225.136, 118.324 )
+frames = SubResource( 4 )
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
